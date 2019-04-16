@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hot Restaurant</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1 class="display-4"><img id="fire" src="./assets/images/fire.png"> Hot Restaurant</h1>
+            <hr class="my-4">
+            <h2>Current Reservations and Waiting List</h2>
+            <a class="btn btn-danger btn-lg" href="/reservation" role="button">Make Reservations</a>
+            <a class="btn btn-secondary btn-lg" href="/" role="button">Home</a>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Current Reservations
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Waiting List
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <a href="/api/tables">API Table Link</a> |
+                <a href="/api/waitlist">API Waitlist Link</a>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
