@@ -1,58 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Hot Restaurant</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/css/style.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <div class="jumbotron text-center">
-            <h1 class="display-4"><img id="fire" src="./assets/images/fire.png"> Hot Restaurant</h1>
-            <hr class="my-4">
-            <h2>Make your reservation</h2>
-            <a class="btn btn-primary btn-lg" href="/tables" role="button">View Tables</a>
-            <a class="btn btn-secondary btn-lg" href="/" role="button">Home</a>
+      <div class="jumbotron text-center">
+        <h1 class="display-4">
+          <img id="fire" src="/images/fire.png" /> Hot Restaurant
+        </h1>
+        <hr class="my-4" />
+        <h2>Make your reservation</h2>
+        <a class="btn btn-primary btn-lg" href="/tables" role="button"
+          >View Tables</a
+        >
+        <a class="btn btn-secondary btn-lg" href="/" role="button">Home</a>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          Table Reservation
         </div>
-        <div class="card">
-            <div class="card-header">
-                Table Reservation
-            </div>
-            <form>
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="name" class="form-control" id="name" aria-describedby="name" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="phone" class="form-control" id="phone" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="id">Unique ID</label>
-                    <input type="id" class="form-control" id="id" placeholder="">
-                </div>
-                <button type="submit" id="sub" class="btn btn-primary">Submit</button>
-            </form>
+        <form>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="name"
+              class="form-control"
+              id="name"
+              aria-describedby="name"
+              placeholder=""
+            />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input
+              type="phone"
+              class="form-control"
+              id="phone"
+              placeholder=""
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder=""
+            />
+          </div>
+          <div class="form-group">
+            <label for="id">Unique ID</label>
+            <input type="id" class="form-control" id="id" placeholder="" />
+          </div>
+          <button type="submit" id="sub" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <a href="/api/tables">API Table Link</a> |
+          <a href="/api/waitlist">API Waitlist Link</a>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <a href="/api/tables">API Table Link</a> |
-                <a href="/api/waitlist">API Waitlist Link</a>
-            </div>
-        </div>
+      </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript">
+      // Question: What does this code do?
+      $("#sub").on("click", function(event) {
+        event.preventDefault();
 
-</body>
+        if (tables.length > 5) {
+          var newTable = {
+            name: $("#name")
+              .val()
+              .trim(),
+            phone: $("#phone")
+              .val()
+              .trim(),
+            email: $("#email")
+              .val()
+              .trim()
+          };
 
+          // Question: What does this code do??
+          $.post("/api/tables", tables).then(function(data) {
+            console.log("add.html", data);
+            alert("Adding to table");
+          });
+        } else {
+          $.post("/api/waitlist", waitlist).then(function(data) {
+            console.log("add.html", data);
+            alert("Adding to wait list");
+          });
+        }
+      });
+    </script>
+  </body>
 </html>
