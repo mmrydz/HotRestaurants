@@ -13,25 +13,31 @@ app.use(express.json());
 app.use(express.static(__dirname + "/assets"));
 
 let tables = [
-  {
-    routeName: "tableroute",
-    name: "name",
-    table: 51,
-    queuePosition: 1
-  }
-];
 
-let waitlist = [
-  {
-    routeName: "waitroute",
-    name: "name",
-    table: 51,
-    queuePosition: 1
-  }
-];
 
-app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "home.html"));
+    {
+        routeName: "tableroute",
+        name: "name",
+        phone: "number",
+        email: "email",
+        table: 1,
+    }
+]
+
+let waitlist =
+    [
+        {
+            routeName: "waitroute",
+            name: "name",
+            phone: "number",
+            email: "email",
+            table: 51,
+            queuePosition: 1,
+        }
+    ]
+
+app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "home.html"));
 });
 
 app.get("/tables", function(req, res) {
@@ -101,6 +107,10 @@ app.post("/api/waitlist", function(req, res) {
   res.json(newwait);
 });
 
-app.listen(PORT, function() {
-  console.log("App listening on PORT " + PORT);
+
+
+
+
+app.listen(PORT, function () {
+    console.log("App listening on PORT " + PORT);
 });
