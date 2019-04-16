@@ -17,8 +17,9 @@ let tables = [
     {
         routeName: "tableroute",
         name: "name",
-        table: 51,
-        queuePosition: 1,
+        phone: "number",
+        email: "email",
+        table: 1,
     }
 ]
 
@@ -27,6 +28,8 @@ let waitlist =
         {
             routeName: "waitroute",
             name: "name",
+            phone: "number",
+            email: "email",
             table: 51,
             queuePosition: 1,
         }
@@ -105,6 +108,10 @@ app.post("/api/waitlist", function (req, res) {
 
     res.json(newwait);
 });
+
+
+
+
 
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
