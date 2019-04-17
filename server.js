@@ -105,8 +105,13 @@ app.post("/api/waitlist", function(req, res) {
   res.json(newwait);
 });
 
+app.post("/api/clear", function(req, res) {
+  // Empty out the arrays of data
+  tablesData.length = 0;
+  waitListData.length = 0;
 
-
+  res.json({ ok: true });
+});
 
 
 app.listen(PORT, function () {
