@@ -13,8 +13,6 @@ app.use(express.json());
 app.use(express.static(__dirname + "/assets"));
 
 let tables = [
-
-
     {
         routeName: "tableroute",
         name: "name",

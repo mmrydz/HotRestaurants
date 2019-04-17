@@ -95,7 +95,7 @@
           };
 
           // Question: What does this code do??
-          $.post("/api/tables", tables).then(function(data) {
+          $.post("/api/tables", newTable).then(function(data) {
             console.log("add.html", data);
             alert("Adding to table");
           });
