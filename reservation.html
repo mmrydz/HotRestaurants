@@ -80,31 +80,39 @@
       // Question: What does this code do?
       $("#sub").on("click", function(event) {
         event.preventDefault();
+        $.get("/api/tables", function(tables) {
+            console.log("table data: ")
+            console.log(tables);
+            alert("Got table data to table");
 
-        if (tables.length > 5) {
-          var newTable = {
-            name: $("#name")
-              .val()
-              .trim(),
-            phone: $("#phone")
-              .val()
-              .trim(),
-            email: $("#email")
-              .val()
-              .trim()
-          };
+            if (tables.length < 5) {
+              var newTable = {
+                name: $("#name")
+                  .val()
+                  .trim(),
+                phone: $("#phone")
+                  .val()
+                  .trim(),
+                email: $("#email")
+                  .val()
+                  .trim()
+              };
+    
+              // Question: What does this code do??
+              console.log(newTable);
+              $.post("/api/tables", newTable, function(data) {
+                console.log("add.html", data);
+                alert("Adding to table");
+              });
+            } else {
+              $.post("/api/waitlist", newTable, function(data) {
+                console.log("add.html", data);
+                alert("Adding to wait list");
+              });
+            }
 
-          // Question: What does this code do??
-          $.post("/api/tables", newTable).then(function(data) {
-            console.log("add.html", data);
-            alert("Adding to table");
+
           });
-        } else {
-          $.post("/api/waitlist", waitlist).then(function(data) {
-            console.log("add.html", data);
-            alert("Adding to wait list");
-          });
-        }
       });
     </script>
   </body>
