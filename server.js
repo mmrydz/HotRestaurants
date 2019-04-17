@@ -10,10 +10,9 @@ var PORT = process.env.PORT || 3000;
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(__dirname + "/assets"));
 
 let tables = [
-
-
     {
         routeName: "tableroute",
         name: "name",
@@ -39,74 +38,71 @@ app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "home.html"));
 });
 
-
-app.get("/tables", function (req, res) {
-    res.sendFile(path.join(__dirname, "tables.html"));
+app.get("/tables", function(req, res) {
+  res.sendFile(path.join(__dirname, "tables.html"));
 });
 
-
-app.get("/reservation", function (req, res) {
-    res.sendFile(path.join(__dirname, "reservation.html"));
+app.get("/reservation", function(req, res) {
+  res.sendFile(path.join(__dirname, "reservation.html"));
 });
 
-app.get("/api/tables", function (req, res) {
-    return res.json(tables);
+app.get("/api/tables", function(req, res) {
+  return res.json(tables);
 });
 
-app.get("/api/waitlist", function (req, res) {
-    return res.json(waitlist);
+app.get("/api/waitlist", function(req, res) {
+  return res.json(waitlist);
 });
 
-app.get("/api/tables/:table", function (req, res) {
-    var chosen = req.params.table;
+app.get("/api/tables/:table", function(req, res) {
+  var chosen = req.params.table;
 
-    console.log(chosen);
+  console.log(chosen);
 
-    for (var i = 0; i < tables.length; i++) {
-        if (chosen === tables[i].routeName) {
-            return res.json(tables[i]);
-        }
+  for (var i = 0; i < tables.length; i++) {
+    if (chosen === tables[i].routeName) {
+      return res.json(tables[i]);
     }
-})
-app.get("/api/waitlist/:waitlist", function (req, res) {
-    var chosen = req.params.waitlist;
+  }
+});
+app.get("/api/waitlist/:waitlist", function(req, res) {
+  var chosen = req.params.waitlist;
 
-    console.log(chosen);
+  console.log(chosen);
 
-    for (var i = 0; i < waitlist.length; i++) {
-        if (chosen === waitlist[i].routeName) {
-            return res.json(waitlist[i]);
-        }
+  for (var i = 0; i < waitlist.length; i++) {
+    if (chosen === waitlist[i].routeName) {
+      return res.json(waitlist[i]);
     }
-})
-
-app.post("/api/tables", function (req, res) {
-    var newtable = req.body;
-
-    newtable.routeName = newtable.name.replace(/\s+/g, "").toLowerCase();
-
-    console.log(newtable);
-
-    tables.push(newtable);
-
-    res.json(newtable);
+  }
 });
 
+app.post("/api/tables", function(req, res) {
+  var newtable = req.body;
 
-app.post("/api/waitlist", function (req, res) {
-    // req.body hosts is equal to the JSON post sent from the user
-    // This works because of our body parsing middleware
-    var newwait = req.body;
+  newtable.routeName = newtable.name.replace(/\s+/g, "").toLowerCase();
 
-    // Using a RegEx Pattern to remove spaces from newwait
-    // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-    newwait.routeName = newwait.name.replace(/\s+/g, "").toLowerCase();
+  console.log(newtable);
 
-    console.log(newwait);
+  tables.push(newtable);
 
-    waitlist.push(newwait);
+  res.json(newtable);
+});
 
-    res.json(newwait);
+app.post("/api/waitlist", function(req, res) {
+  // req.body hosts is equal to the JSON post sent from the user
+  // This works because of our body parsing middleware
+  var newwait = req.body;
+
+  // Using a RegEx Pattern to remove spaces from newwait
+  // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+  newwait.routeName = newwait.name.replace(/\s+/g, "").toLowerCase();
+
+  console.log(newwait);
+
+  waitlist.push(newwait);
+
+  res.json(newwait);
 });
 
 
