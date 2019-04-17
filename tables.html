@@ -2,88 +2,86 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hot Restaurant</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hot Restaurant</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <div class="jumbotron text-center">
-            <h1 class="display-4"><img id="fire" src="./assets/images/fire.png"> Hot Restaurant</h1>
-            <hr class="my-4">
-            <h2>Current Reservations and Waiting List</h2>
-            <a class="btn btn-danger btn-lg" href="/reservation" role="button">Make Reservations</a>
-            <a class="btn btn-secondary btn-lg" href="/" role="button">Home</a>
-        </div>
-        <div class="card">
-            <div  class="card-header">
-                Current Reservations
-                <table id="current-tables" class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Phone Number</th>
-                            <th scope="col">Email</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                          </tr>
-                        </tbody>
-                       </table>
-               
-
-
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                Waiting List
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <a href="/api/tables">API Table Link</a> |
-                <a href="/api/waitlist">API Waitlist Link</a>
-            </div>
-        </div>
+  <div class="container">
+    <div class="jumbotron text-center">
+      <h1 class="display-4"><img id="fire" src="./assets/images/fire.png"> Hot Restaurant</h1>
+      <hr class="my-4">
+      <h2>Current Reservations and Waiting List</h2>
+      <a class="btn btn-danger btn-lg" href="/reservation" role="button">Make Reservations</a>
+      <a class="btn btn-secondary btn-lg" href="/" role="button">Home</a>
     </div>
+    <div class="card">
+      <div class="card-header">
+        Current Reservations
+        <table id="current-tables" class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Phone Number</th>
+              <th scope="col">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+           
+           
+          </tbody>
+        </table>
 
-<script type="text/javascript">
-function tableList(){
-  $.ajax({
-    url: "/api/tables",
-    method: "GET"
-  }).then(function (tableData){
-    console.log(tableData);
-
-  })//end then
-}// end tablelist
 
 
-</script>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        Waiting List
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <a href="/api/tables">API Table Link</a> |
+        <a href="/api/waitlist">API Waitlist Link</a>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    function tableList() {
+      $.ajax({
+        url: "/api/tables",
+        method: "GET"
+      }).then(function (tableData) {
+
+        for (let i = 0; i < tableData.length; i++) {
+          let myTable = $("#current-tables");
+          let tableRow = $("<tr>");
+
+          tableRow.append(
+            $("<td>").text("ID: " + tableData[i].table),
+            $("<td>").text("Name: " + tableData[i].name),
+            $("<td>").text("Phone Number: " + tableData[i].phone),
+            $("<td>").text("Email: " + tableData[i].email)
+          )
+          myTable.append(tableRow);
+        }
+        console.log(tableData);
+      })//end then
+    }// end tablelist
+    tableList();
+
+
+  </script>
 
 
 </body>
